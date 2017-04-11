@@ -10,10 +10,13 @@ package Algorithm;
  * @author leslie
  */
 public class Hashing {
+    
+    //哈希表
     private int[] hashArray;
-    private int arraySize;
+    private int arraySize; //哈希表长度
     
 
+    //哈希表初始化
     public Hashing(int size) {
         arraySize = size;
         hashArray = new int[arraySize];
@@ -26,23 +29,32 @@ public class Hashing {
     public void insert(int key){
 
         int address = hashFunc(key);
+        int mark = 1;
         while(hashArray[address] != 0){
-            ++address;          // linear probing
-            address %= arraySize;
+//            address = hashFunc(++address);  //linear probing
+            address = hashFunc(address + mark*mark);
+            mark++;
         }
+        System.out.println(mark);
         hashArray[address] = key;
     }
     
     public int search(int key) {
-        int address = hashFunc(key); 
-        while(hashArray[address] != 0) {
-            if(hashArray[address] == key)
-                return address;
-            ++address;
-            address %= arraySize;
+        int address = hashFunc(key);
+        if(hashArray[address] == 0){
+            return -1;
         }
-        return -1;              // search fail
-}
+        while(hashArray[address]!=key) {
+            address = hashFunc(++address);
+        }
+        return address;
+    }
+    
+    public void clear(){
+        for (int i = 0; i < arraySize; i++) {
+            hashArray[i] =0;
+        }
+    }
     
     
     

@@ -25,7 +25,6 @@ public class Tree_Block {
         this.startAddress = startAddress;
         this.root = new Block_Node(size, startAddress);
         instantiate_Fulltree(root, size, startAddress);
-
     }
 
     public void instantiate_Fulltree(Block_Node root, int size, int startAddress) {
@@ -85,7 +84,6 @@ public class Tree_Block {
                 startNode.setBlockStatus("used");
                 return startNode;
             }
-
             if ((startNode != null) && (startNode.getBlockStatus().equals("unused"))) {
                 stack.push(startNode);
 //                System.out.println(startNode.getSize() + " status " + startNode.getBlockStatus());
@@ -143,7 +141,6 @@ public Block_Node Consecutive_reservation(Block_Node root, int blocksize)
              first_half.setBlockStatus("unused");
              return null;
          }
-             
      }
      while(!stack.isEmpty())
      {
@@ -154,17 +151,17 @@ public Block_Node Consecutive_reservation(Block_Node root, int blocksize)
      
     
 }
-    
+    //check tje availability of this node. If all of its sub node is unused then return true.
     public boolean NodeAvail(Block_Node focusNode) {
-
+        //stack is used for traverse
         Stack<Block_Node> stack = new Stack<>();
         Block_Node startNode = focusNode;
+        //当startNode不为空, 或, stack不为空
         while ((startNode != null) || (!stack.empty())) {
             if ((startNode != null) && (startNode.getBlockStatus().equals("used"))) {
                 return false;
             }
-
-            if (startNode != null) {
+            if (startNode != null) { //不为空
                 stack.push(startNode);
 //                System.out.println(startNode.getSize() + " status " + startNode.getBlockStatus());
                 startNode = startNode.getLeftChild();
@@ -174,7 +171,6 @@ public Block_Node Consecutive_reservation(Block_Node root, int blocksize)
                 startNode = startNode.getRightChild();
             }
         }
-
         return true;
     }
 

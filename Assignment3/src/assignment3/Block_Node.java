@@ -12,14 +12,11 @@ package assignment3;
 public class Block_Node {
     
     private int timer;
-
     private int size;
     private int startAddress;
-
     private String blockStatus;
 
     Block_Node leftChild;
-
     Block_Node rightChild;
 
     public Block_Node() {
@@ -29,10 +26,7 @@ public class Block_Node {
         this.size = size;
         this.startAddress = startAddress;
         blockStatus = "unused";
-        timer =3;
-//        leftChild = new Block_Node();
-//        rightChild = new Block_Node();
-
+        timer = 3;
     }
 
     public int getSize() {

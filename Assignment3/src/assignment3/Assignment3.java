@@ -25,7 +25,7 @@ public class Assignment3 {
         
         Block_Node p = tree_Block.getRoot();
 //        tree_Block.levelOutPut(p);
-     // random requests   
+//        random requests   
         Random seed = new Random();
         Deque<Block_Node> result = new ArrayDeque<>();
         
