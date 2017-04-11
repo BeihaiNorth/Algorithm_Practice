@@ -172,9 +172,9 @@ public class Sort {
     //main method
     public static void main(String[] args) {
 
-        for (int size = 420000; size <= 1000000; size = size + 10000) {
+        for (int size = 1; size <= 500; size = size + 1) {
             
-            System.out.println("Selection sort: size" + size + " nanotime");
+            //System.out.println("Selection sort: size" + size + " nanotime");
             //Random generate an array of 'size'
             int[] a = new int[size];
             Random r = new Random(size);
@@ -182,15 +182,26 @@ public class Sort {
                 a[i] = r.nextInt(size);
             }
             
-            for (int i = 0; i < 10; i++) {
-                long startTime = System.nanoTime();
-                Sort.selectionSort(a);
-                long runTime = System.nanoTime() - startTime;
-                System.out.println(runTime);
-                if (i < 10) {
+            long totaltime = 0;
+            long runTime = 0;
+            for (int i = 0; i < 3000; i++) {
+                //timer
+                if(size <0){
+                    long startTime = System.nanoTime();
+                    Sort.selectionSort(a);
+                    runTime = System.nanoTime() - startTime;
+                }else{
+                    long startTime = System.nanoTime();
+                    Sort.quickSort(a, 0, a.length-1);
+                    runTime = System.nanoTime() - startTime;
+                }
+                totaltime += runTime;
+                if (i < 3000) {
                     Sort.shuffle(a);
                 }
             }
+            long averagetime = totaltime/3000;
+            System.out.println(averagetime);
         }
 
     }
