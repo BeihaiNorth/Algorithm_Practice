@@ -61,42 +61,29 @@ public class Assignment3 {
         
         
         //BST method
-        int bstSize=8;
-        int rootMark=bstSize;
-        Block_Node2 root = new Block_Node2(bstSize, rootMark);
-        Tree_Block2 bstTree = new Tree_Block2(bstSize);
-        
-        Block_Node2 n1;
-        Block_Node2 n2;
-        Block_Node2 n3;
-        Block_Node2 n4;
-        n1 = bstTree.request(4);
-        n2 = bstTree.request(2);
-        n3 = bstTree.request(2);
-        n4 = bstTree.request(4);
-        System.out.println("Request size: 4");
-        System.out.println("mark:"+n1.getMark()+"     size:"+n1.getSize());
-        System.out.println("Request size: 2");
-        System.out.println("mark:"+n2.getMark()+"     size:"+n2.getSize());
-        System.out.println("Request size: 2");
-        System.out.println("mark:"+n3.getMark()+"     size:"+n3.getSize());
-        System.out.println("Request size: 4");
-        if (n4 == null) {
-            System.out.println("this request failed");
-        }else{
-        System.out.println("mark:"+n4.getMark()+"     size:"+n4.getSize());
-        }
-        
-        //test
-        //bstTree.inOrder(bstTree.getRoot());  
-        
-//        int mark = 8;
-//        System.out.println("search for mark" + mark);
-//        Block_Node2 result;
-//        result = bstTree.search(mark, bstTree.getRoot());
-//        System.out.println("Result:");
-//        System.out.println("size:" + result.getSize());
-//        System.out.println("Mark:" + result.getMark());
+//        int bstSize=128;
+//        int rootMark=bstSize;
+//        Block_Node2 root = new Block_Node2(bstSize, rootMark);
+//        Tree_Block2 bstTree = new Tree_Block2(bstSize);
+//        
+//        for (int i = 0; i < 10; i++) {    //number of requests
+//            System.out.println("For the No." + (i + 1) + " request:");
+//            int reqIndex = seed.nextInt((int) (Math.log(bstSize * 0.2) / Math.log(2)) + 1);     //focus on size of lower 20% of the tree
+//            System.out.println("Requested size is 2^" + reqIndex );
+//            int reqSize = (int) Math.pow(2, reqIndex);
+//            
+//            System.out.println("Block Size" + "  "+ "Node mark");
+//            
+//            Block_Node2 search = bstTree.request(reqSize);
+//            if (search != null) {
+//                System.out.println(search.getSize() + "            " + search.getMark());
+//                System.out.println();
+//            } else {
+//                System.out.println("not found");
+//                System.out.println();
+//            }
+//            
+//        }
 
         
 
