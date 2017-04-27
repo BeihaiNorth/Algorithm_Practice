@@ -16,7 +16,7 @@ public class TestPSO {
     public static void main(String []arg)  
     {  
         PSO pso=new PSO();  
-        pso.init(20, 0, 0); //particle number, goal
+        pso.init(20, 10, 10); //particle number, goal
         System.out.println("pso initiated");
         TimerTask timerTask = pso;
         Timer timer = new Timer(false);
@@ -26,7 +26,6 @@ public class TestPSO {
             continue;
         }
         timer.cancel();
-        
     }
     
     public static boolean isQualified(PSO pso){

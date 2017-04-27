@@ -33,7 +33,7 @@ public class Particle1 implements Runnable{
      * @return 返回low—uper之间的数 
      */  
     private double rand(double low, double uper) {  
-        rnd = new Random();  
+        rnd = new Random();
         return rnd.nextDouble() * (uper - low) + low;  
     }  
     /** 
