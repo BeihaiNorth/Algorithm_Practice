@@ -12,15 +12,15 @@ import java.util.TimerTask;
  *
  * @author leslie
  */
-public class TestPSO {
+public class Main {
     public static void main(String []arg)  
     {  
         PSO pso=new PSO();  
-        pso.init(20, 10, 10); //particle number, goal
+        pso.init(30, 30, 0); //particle number, total city number, start date
         System.out.println("pso initiated");
         TimerTask timerTask = pso;
         Timer timer = new Timer(false);
-        timer.scheduleAtFixedRate(timerTask, 0, 1);
+        timer.scheduleAtFixedRate(timerTask, 0, 1); //period in milliseconds
         System.out.println("Timertask started");
         while (!isQualified(pso)) {            
             continue;
@@ -29,12 +29,12 @@ public class TestPSO {
     }
     
     public static boolean isQualified(PSO pso){
-        for (int i = 0; i < pso.pcount; i++) {
-            
-            if (pso.pars[i].getV()[0]>0.001 || pso.pars[i].getV()[1]>0.001) {
-                return false;
-            }
-        }
-        return true;
+//        for (int i = 0; i < pso.pcount; i++) {
+//            
+//            if (pso.pars[i].getV()[0]>0.001 || pso.pars[i].getV()[1]>0.001) {
+//                return false;
+//            }
+//        }
+        return false;
     }
 }

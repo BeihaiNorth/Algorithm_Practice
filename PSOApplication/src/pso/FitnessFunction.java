@@ -9,6 +9,8 @@ package pso;
  *
  * @author leslie
  */
+
+
 public class FitnessFunction {
     private double []goal;
     
@@ -25,7 +27,11 @@ public class FitnessFunction {
     }
     
     
-    
+    /**
+     * 
+     * @param p the position of a particle
+     * @return the distance the particle is form the final goal
+     */
     public double calcFitness(double []p){
         double sum = 0;
         for (int i = 0; i < 2; i++) {
