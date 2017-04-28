@@ -16,7 +16,7 @@ public class Particle implements Runnable {
     
     private int []cityorder;    //current personal solution
     private int []pbest;        //personal best solution
-    private int []gbest;        //global best solution
+    public static int []gbest;        //global best solution
     private int distance;       //total distance for current solution, culculated by fitnessFunction
     private int startDay;       //1~7 represent Monday ~ Sunday
     private FitnessFunction fitnessFunction;
@@ -25,7 +25,7 @@ public class Particle implements Runnable {
     private FlightInfo flights;
     
     /*argument for calculation*/
-    private static double w = 0.7; //inertia weight in the equation
+    private static double w = 0.; //inertia weight in the equation
     private static double c1 = 2; // positive constant parameter acceleration coefficients
     private static double c2 = 2;
     public static Random rand;
@@ -91,31 +91,31 @@ public class Particle implements Runnable {
         
         //update swaporder
         ArrayList<Swapper> newSwapOrder = new ArrayList<>();
-        int length = swapOrder.size();
+        int length = (int)(swapOrder.size()*w);
         if( length > cityorder.length){
             length = cityorder.length;
         }
         for (int i = 0; i < length; i++) {
             newSwapOrder.add(swapOrder.get(i));
         }
-        
+        //
         ArrayList<Swapper> newSwapOrder1 =orderMinusMethod(pbest, cityorder);
         float r1 = rand.nextFloat();
-        int length1 = (int)(swapOrder.size() * r1);
+        int length1 = (int)(newSwapOrder1.size() * r1);
         if( length1 > cityorder.length){
             length1 = cityorder.length;
         }
         for (int i = 0; i < length1; i++) {
             newSwapOrder.add(newSwapOrder1.get(i));
         }
-        
+        //
         ArrayList<Swapper> newSwapOrder2 =orderMinusMethod(gbest, cityorder);
         float r2 = rand.nextFloat();
-        int length2 = (int)(swapOrder.size() * r1);
+        int length2 = (int)(newSwapOrder2.size() * r2);
         if( length2 > cityorder.length){
             length2 = cityorder.length;
         }
-        for (int i = 0; i < length1; i++) {
+        for (int i = 0; i < length2; i++) {
             newSwapOrder.add(newSwapOrder2.get(i));
         }
         
@@ -129,16 +129,25 @@ public class Particle implements Runnable {
             cityorder[a] = cityorder[b];
             cityorder[b] = temp;
         }
-        
-        
-        
-        
-        
-
 
     }
     
+    /**
+     * 
+     * @param order1 target sequence
+     * @param order2 original sequence
+     * @return 
+     */
     private ArrayList<Swapper> orderMinusMethod(int[] order1, int []order2){
+        String name = Thread.currentThread().getName();
+//        System.out.println(name+" Order1 before:");
+//        for (int i : order1) {
+//            System.out.print(+i+",");
+//        }
+//        System.out.println(name+"Order2 before:");
+//        for (int i : order2) {
+//            System.out.print(i+",");
+//        }
         ArrayList<Swapper>  list = new ArrayList<Swapper>();
         int[]temp = order2;
         Swapper s;
@@ -146,45 +155,53 @@ public class Particle implements Runnable {
         int index = -1;
         for (int i = 0; i < cityNum; i++) {
             if(temp[i] != order1[i]){
-                //finding the index in order1 that indicated the same value as temp[i]
-                for(int j = 0; j < cityNum; j++){
-                    if (order1[j] == temp[i]) {
+                //finding the index in temp that indicated the same value as order1
+                for(int j = i; j < cityNum; j++){
+                    if (order1[i] == temp[j]) {
                         index = j;
                         break;
                     }
                 }
                 //exchage the value
                 int temp2 = temp[i];
-                temp[i] = order1[index];
+                temp[i] = temp[index];
                 temp[index] = temp2;
                 s = new Swapper(i, index);
                 list.add(s);
             }
         }
+//        System.out.println(name+"Order1 after:");
+//        for (int i : order1) {
+//            System.out.print(i+",");
+//        }
+//        System.out.println(name+"Order2 after:");
+//        for (int i : temp) {
+//            System.out.print(i+",");
+//        }
         return list;
     }
 
     @Override
     public void run() {   
             String name = Thread.currentThread().getName();
-//            System.out.println(name+" started'");
+            System.out.println(name+" started'");
 
             update();
             
             fitness = fitnessFunction.calcFitness(cityorder);
             int pbestFitness = fitnessFunction.calcFitness(pbest);
             int gbestFitness = fitnessFunction.calcFitness(gbest);
-//            System.out.println(name+ "pbest fitness:" + pbestFitness+ "  gbest fitness:" + gbestFitness);
-//            System.out.println(name+ "fitness:" + fitness);
+            System.out.println(name+ "pbest fitness:" + pbestFitness+ "  gbest fitness:" + gbestFitness);
+            System.out.println(name+ "fitness:" + fitness);
             if (fitness <= pbestFitness) {
                 pbest = cityorder;
-//                System.out.println(name+"pbest fitness :" + pbestFitness);
+                System.out.println(name+"pbest fitness :" + pbestFitness);
                 if (fitness < gbestFitness) {
                     gbest = cityorder;
-//                    System.out.println(name+"gbest fitness :" + gbestFitness);
+                    System.out.println(name+"gbest fitness :" + gbestFitness);
                 }
             }
-//            System.out.println(name+" ended'");
+            System.out.println(name+" ended'");
     }
 
     public int[] getCityorder() {

@@ -21,14 +21,14 @@ public class FitnessFunction {
         int totalPrice = 0;
         int cityNum = solution.length;
         int [][]ticketPriceGraph =  flightInfo.getTicketPrice();
-        for (int i = 0; i < cityNum; i++) {
+        for (int i = 0; i < cityNum-1; i++) {
             int a = solution[i];
             int b = solution[i+1];
             int price = ticketPriceGraph[a][b];
             totalPrice += price;
         }
         //adding the ticket price going back to the starting city
-        totalPrice += ticketPriceGraph[0][cityNum];
+        totalPrice += ticketPriceGraph[0][cityNum-1];
         return totalPrice;
     }
 
