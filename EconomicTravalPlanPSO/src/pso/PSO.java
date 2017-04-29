@@ -17,6 +17,39 @@ public class PSO extends TimerTask{
     int gbest;          //record the current total lowest cost
     int pcount;         //total amount of particles
     FlightInfo flightInfo;
+
+    public Particle[] getPars() {
+        return pars;
+    }
+
+    public void setPars(Particle[] pars) {
+        this.pars = pars;
+    }
+
+    public int getGbest() {
+        return gbest;
+    }
+
+    public void setGbest(int gbest) {
+        this.gbest = gbest;
+    }
+
+    public int getPcount() {
+        return pcount;
+    }
+
+    public void setPcount(int pcount) {
+        this.pcount = pcount;
+    }
+
+    public FlightInfo getFlightInfo() {
+        return flightInfo;
+    }
+
+    public void setFlightInfo(FlightInfo flightInfo) {
+        this.flightInfo = flightInfo;
+    }
+    
     
     /** 
      * Initialization of particle swarm
